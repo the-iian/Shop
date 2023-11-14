@@ -1,18 +1,14 @@
 package com.jpabook.shop.dao;
 
-import com.jpabook.shop.entity.Member;
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import javax.transaction.Transactional;
-
-import static org.junit.Assert.*;
 
 @WebAppConfiguration
 @RunWith(SpringRunner.class)
