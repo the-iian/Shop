@@ -8,6 +8,8 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import static javax.persistence.FetchType.*;
+
 @Entity
 @Getter @Setter
 public class Category {
@@ -26,7 +28,7 @@ public class Category {
 
 
     //셀프 양방향 연관관계 설정, 이름만 내꺼지 다른 엔티티랑 매핑하는거랑 똑같이 생각하기
-    @ManyToOne
+    @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "parent_id")
     private Category parent; // 카테고리 구조는 개체구조로 쭉 내려간다. (위로도, 아래로도 볼 수 있어야 함)
     // 나의 부모가 나의 타입이니까 Category 넣어주기
