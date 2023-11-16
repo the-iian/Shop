@@ -1,6 +1,8 @@
 package com.jpabook.shop.domain;
 
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -11,6 +13,7 @@ import static javax.persistence.FetchType.*;
 @Entity
 @Table(name = "orders")
 @Getter @Setter
+@NoArgsConstructor(access = AccessLevel.PROTECTED) // protected OrderItem(){} 방지 (직접 생성하지않고 다른 스타일로 유도용)
 public class Order {
 
     @Id @GeneratedValue
@@ -89,4 +92,9 @@ public class Order {
         }
         return totalPrice;
     }
+
+    //검색
+//    public List<Order> findOrders(OrderSearch orderSearch) {
+
+//    }
 }

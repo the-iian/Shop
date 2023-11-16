@@ -1,13 +1,16 @@
 package com.jpabook.shop.domain;
 
 import com.jpabook.shop.domain.item.Item;
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import javax.persistence.*;
 import static javax.persistence.FetchType.*;
 
 @Entity
 @Getter @Setter
+@NoArgsConstructor(access = AccessLevel.PROTECTED) // protected OrderItem(){} 방지 (제약하는 스타일로 코딩을해야 좋은 설계와 유지보수로 끌어간다)
 public class OrderItem {
 
     @Id @GeneratedValue
