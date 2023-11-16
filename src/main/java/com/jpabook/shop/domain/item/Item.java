@@ -20,7 +20,7 @@ public abstract class Item { // 구현체를 가지고할거라 추상클래스�
 
     private String name;
     private int price;
-    private int stockQuantity;
+    private int stockQuantity; // 재고 수량
 
     @ManyToMany(mappedBy = "items")
     private List<Category> categories = new ArrayList<>();
@@ -32,7 +32,7 @@ public abstract class Item { // 구현체를 가지고할거라 추상클래스�
     }
 
     public void removeStock(int quantity) {
-        int restStock = this.stockQuantity - quantity;
+        int restStock = this.stockQuantity-quantity;
         if (restStock < 0) {
             throw new NotEnoughStockException("need more stock"); // Custom Exception
 

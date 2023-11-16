@@ -4,7 +4,6 @@ import com.jpabook.shop.domain.item.Item;
 import lombok.Getter;
 import lombok.Setter;
 import javax.persistence.*;
-
 import static javax.persistence.FetchType.*;
 
 @Entity
@@ -22,8 +21,38 @@ public class OrderItem {
     @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "order_id")
     private Order order;
-
-    private int orderPrice; // 주문가격
-
+    private int orderPrice;
     private int count; // 주문수량
+
+
+    //==생성 메서드==//
+    public static OrderItem createOrderItem(Item item, int orderPrice, int count){
+        OrderItem orderItem = new OrderItem(); // 주문항목 생성
+
+        // 생성된 주문 항목에 아이템, 주문가격, 수량 설정
+        orderItem.setItem(item);
+        orderItem.setOrderPrice(orderPrice);
+        orderItem.setCount(count);
+
+        // 주문 항목에 해당하는 아이템 재고 감소
+        item.removeStock(count);
+
+        // 생성된 주문 항목 반환
+        return orderItem;
+    }
+
+    //==비즈니스 로직==//
+    public void cancel() {
+        getItem().addStock(count); // 주문취소했을때 재고를 다시 주문수량만큼 원복하기
+
+    }
+
+
+    //==조회 로직==//
+    // 주문상품 총가격 조회
+    public int getTotalPrice() {
+        return getOrderPrice() * getCount();
+
+    }
+
 }

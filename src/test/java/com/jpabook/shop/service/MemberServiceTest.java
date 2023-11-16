@@ -16,6 +16,11 @@ import static org.junit.Assert.*;
 @Transactional // Transactional을 걸고 테스트한다음 테스트끝나면 다시 rollback함. 서비스나 리파지토리에서는 롤백하지않음
 public class MemberServiceTest {
 
+    /* 테스트 요구사항
+       1. 회원가입 성공
+       2. 회원가입할 때 같은 이름이 있으면 예외가 발생해야한다 */
+
+
     @Autowired MemberService memberService;
     @Autowired MemberRepository memberRepository;
 

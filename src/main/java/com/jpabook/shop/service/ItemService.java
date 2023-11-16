@@ -6,7 +6,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.util.List;
 
 @Service
@@ -23,12 +22,12 @@ public class ItemService { // itemRepository에 의해 위임만하는 class
         itemRepository.save(item);
     }
 
-    // @Transactional(readOnly = true)에 의해 읽기전용으로 수행됨
+    // 단건 조회 @Transactional(readOnly = true)에 의해 읽기전용으로 수행됨
     public Item findOne(Long itemId) {
         return itemRepository.findOne(itemId);
     }
 
-    // @Transactional(readOnly = true)에 의해 읽기전용으로 수행됨
+    // 전체 조회 @Transactional(readOnly = true)에 의해 읽기전용으로 수행됨
     public List<Item> findItems(){
         return itemRepository.findAll();
     }

@@ -50,4 +50,43 @@ public class Order {
         this.delivery = delivery;
         delivery.setOrder(this);
     }
+
+    //==생성 메서드==// 복잡한 생성은 별도의 생성메서드가 있어야 좋음
+    public static Order createOrder(Member member, Delivery delivery, OrderItem... orderItems) {
+        Order order = new Order();
+        order.setMember(member);
+        order.setDelivery(delivery);
+
+        for (OrderItem orderItem : orderItems) {
+            order.addOrderItem(orderItem);
+        }
+
+        order.setStatus(OrderStatus.ORDER); // 주문상태를 ORDER로 강제해둠
+        order.setOrderDate(LocalDateTime.now());
+        return order;
+    }
+
+    //==비즈니스 로직==//
+
+    /* 주문 취소 (주문가능한 재고수량이 원복되어야함) */
+    public void cancel() {
+        if (delivery.getStatus() == DeliveryStatus.COMP) { // 배송완료된 조건
+            throw new IllegalStateException("이미 배송완료된 상품은 취소가 불가능합니다.");
+        }
+
+        this.setStatus(OrderStatus.CANCEL);
+        for (OrderItem orderItem : orderItems) { // for문을 돌면서 주문취소된 재고를 원복시킴
+            orderItem.cancel();
+        }
+    }
+
+    //==조회 로직==//
+    /* 전체 주문가격 조회 */
+    public int getTotalPrice() { // 전체 주문가격 조회
+        int totalPrice = 0;
+        for (OrderItem orderItem : orderItems) {
+            totalPrice += orderItem.getTotalPrice();
+        }
+        return totalPrice;
+    }
 }
