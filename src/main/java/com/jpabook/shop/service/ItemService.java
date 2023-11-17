@@ -13,7 +13,6 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ItemService { // itemRepository에 의해 위임만하는 class
 
-
     @Autowired
     private final ItemRepository itemRepository;
 
